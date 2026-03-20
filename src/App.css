@@ -1,201 +1,91 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
-
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
-  position: relative;
-  width: 100%;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
-
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
-}
-
-/* DYHS Home page styles */
+/* ─── Reset & Root ─── */
 #root {
   width: 100%;
   max-width: 100%;
   margin: 0;
   text-align: left;
   border-inline: none;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─── Base ─── */
 .dyhs {
   min-height: 100vh;
-  background: #f6f7fb;
-  color: #0f172a;
+  --season-accent: #0f8f85;
+  --season-accent-rgb: 15, 143, 133;
+  --season-bg: #f3fbfa;
+  --season-surface: #ffffff;
+  --season-muted: rgba(15, 23, 42, 0.76);
+  --season-hero-fade: rgba(246, 247, 251, 0.85);
+  --season-contact-1: #0f8f85;
+  --season-contact-2: #14b8a6;
+  --season-heading: #0f172a;
+  --season-text: #1f2937;
+  --season-border: rgba(15, 23, 42, 0.1);
+  --season-border-strong: rgba(15, 23, 42, 0.18);
+  --season-soft: rgba(var(--season-accent-rgb), 0.08);
+  --season-soft-strong: rgba(var(--season-accent-rgb), 0.14);
+  background: var(--season-bg);
+  color: var(--season-text);
+  transition: background 260ms ease, color 260ms ease;
+}
+
+.dyhs[data-season='spring'] {
+  --season-accent: #16c25b;
+  --season-accent-rgb: 22, 194, 91;
+  --season-bg: #effdf4;
+  --season-surface: #ffffff;
+  --season-muted: rgba(22, 101, 52, 0.8);
+  --season-hero-fade: rgba(236, 253, 243, 0.92);
+  --season-contact-1: #16b34f;
+  --season-contact-2: #22d365;
+  --season-heading: #14532d;
+  --season-text: #14532d;
+}
+
+.dyhs[data-season='summer'] {
+  --season-accent: #f08b08;
+  --season-accent-rgb: 240, 139, 8;
+  --season-bg: #fff7e8;
+  --season-surface: #fffdf8;
+  --season-muted: rgba(146, 64, 14, 0.82);
+  --season-hero-fade: rgba(255, 247, 220, 0.92);
+  --season-contact-1: #f59e0b;
+  --season-contact-2: #fb7e17;
+  --season-heading: #7c2d12;
+  --season-text: #7c2d12;
+}
+
+.dyhs[data-season='fall'] {
+  --season-accent: #f16711;
+  --season-accent-rgb: 241, 103, 17;
+  --season-bg: #fff3ea;
+  --season-surface: #fffdfa;
+  --season-muted: rgba(154, 52, 18, 0.82);
+  --season-hero-fade: rgba(255, 242, 229, 0.93);
+  --season-contact-1: #eb5c0d;
+  --season-contact-2: #fb8b33;
+  --season-heading: #7c2d12;
+  --season-text: #7c2d12;
+}
+
+.dyhs[data-season='winter'] {
+  --season-accent: #0b9be0;
+  --season-accent-rgb: 11, 155, 224;
+  --season-bg: #ecf7ff;
+  --season-surface: #f8fcff;
+  --season-muted: rgba(12, 74, 110, 0.8);
+  --season-hero-fade: rgba(232, 246, 255, 0.94);
+  --season-contact-1: #0b90d1;
+  --season-contact-2: #1bb3f4;
+  --season-heading: #0c4a6e;
+  --season-text: #0c4a6e;
 }
 
 .dyhs-container {
@@ -204,15 +94,30 @@
   padding: 0 20px;
 }
 
+/* ─── Header ─── */
 .dyhs-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 30;
-  background: rgba(255, 255, 255, 0);
-  backdrop-filter: none;
-  border-bottom: none;
+  z-index: 50;
+  background: transparent;
+  transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+}
+
+.dyhs-header.scrolled {
+  background: color-mix(in srgb, var(--season-surface) 78%, transparent);
+  backdrop-filter: blur(16px) saturate(1.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.dyhs-header.scrolled .dyhs-nav a {
+  color: var(--season-text);
+}
+
+.dyhs-header.scrolled .dyhs-nav a:hover {
+  color: var(--season-accent);
 }
 
 .dyhs-header-inner {
@@ -223,7 +128,6 @@
   max-width: 1120px;
   margin: 0 auto;
   padding: 12px 20px;
-  flex-wrap: wrap;
 }
 
 .dyhs-brand {
@@ -234,37 +138,45 @@
 }
 
 .dyhs-logo {
-  width: 84px;
-  height: 84px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   object-fit: contain;
-  background: #ffffff;
-  box-shadow: 0 8px 18px rgba(2, 6, 23, 0.08);
+  background: transparent;
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.18);
+  transition: transform 0.3s ease;
+}
+
+.dyhs-logo:hover {
+  transform: scale(1.06);
 }
 
 .dyhs-nav {
   display: flex;
-  gap: 22px;
+  gap: 8px;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .dyhs-nav a {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
-  font-size: 15px;
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
 }
 
 .dyhs-nav a:hover {
-  color: rgba(167, 243, 208, 0.95);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
 }
 
-.dyhs-brand .dyhs-logo {
-  background: transparent;
-  box-shadow: 0 10px 25px rgba(2, 6, 23, 0.25);
+.dyhs-header.scrolled .dyhs-nav a:hover {
+  background: rgba(var(--season-accent-rgb), 0.1);
 }
 
+/* ─── Burger ─── */
 .dyhs-burger {
   display: none;
   width: 44px;
@@ -276,6 +188,16 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dyhs-header.scrolled .dyhs-burger {
+  border-color: rgba(15, 23, 42, 0.12);
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.dyhs-header.scrolled .dyhs-burger-lines span {
+  background: rgba(15, 23, 42, 0.8);
 }
 
 .dyhs-burger-lines {
@@ -289,21 +211,15 @@
   height: 2px;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 2px;
+  transition: background 0.2s;
 }
 
+/* ─── Drawer ─── */
 .dyhs-drawer-overlay {
   position: fixed;
   inset: 0;
   background: rgba(15, 23, 42, 0.45);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 150ms ease;
   z-index: 80;
-}
-
-.dyhs-drawer-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
 }
 
 .dyhs-drawer {
@@ -311,16 +227,12 @@
   top: 0;
   left: 0;
   height: 100%;
-  width: 280px;
-  background: rgba(255, 255, 255, 0.98);
-  border-right: 1px solid rgba(15, 23, 42, 0.08);
-  transform: translateX(-105%);
-  transition: transform 180ms ease;
-  padding: 14px 14px 18px;
-}
-
-.dyhs-drawer-overlay.open .dyhs-drawer {
-  transform: translateX(0);
+  width: 300px;
+  max-width: 85vw;
+  background: color-mix(in srgb, var(--season-surface) 94%, transparent);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--season-border);
+  padding: 18px;
 }
 
 .dyhs-drawer-top {
@@ -328,7 +240,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
 .dyhs-drawer-logo {
@@ -340,63 +252,64 @@
 }
 
 .dyhs-drawer-close {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.10);
-  background: #fff;
-  color: rgba(15, 23, 42, 0.9);
-  font-size: 26px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--season-border);
+  background: var(--season-surface);
+  color: var(--season-text);
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.dyhs-drawer-close:hover {
+  background: var(--season-soft);
 }
 
 .dyhs-drawer-nav {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
   padding-top: 8px;
 }
 
 .dyhs-drawer-nav a {
   text-decoration: none;
-  color: rgba(15, 23, 42, 0.9);
-  font-weight: 800;
-  padding: 12px 12px;
+  color: var(--season-text);
+  font-weight: 700;
+  padding: 14px 16px;
   border-radius: 12px;
-  background: rgba(15, 23, 42, 0.04);
+  background: var(--season-soft);
+  transition: background 0.15s, transform 0.15s;
 }
 
 .dyhs-drawer-nav a:hover {
-  background: rgba(15, 23, 42, 0.07);
+  background: rgba(var(--season-accent-rgb), 0.1);
+  transform: translateX(4px);
 }
 
-.dyhs-hero-grad {
-  background: linear-gradient(
-    180deg,
-    rgba(15, 23, 42, 0.55) 0%,
-    rgba(15, 23, 42, 0.18) 40%,
-    rgba(246, 247, 251, 0.7) 100%
-  );
-}
-
+/* ─── Hero ─── */
 .dyhs-hero {
   position: relative;
   min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 116px 0 48px;
+  padding: 120px 0 100px;
   overflow: hidden;
 }
 
 .dyhs-hero-bg {
   position: absolute;
   inset: 0;
-  background-size: 100% auto;
-  background-position: top center;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  transform: scale(1);
   filter: saturate(1.1) contrast(1.02);
   z-index: 0;
 }
@@ -406,9 +319,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(15, 23, 42, 0.55) 0%,
-    rgba(15, 23, 42, 0.18) 38%,
-    rgba(246, 247, 251, 0.7) 100%
+    rgba(15, 23, 42, 0.6) 0%,
+    rgba(15, 23, 42, 0.25) 40%,
+    var(--season-hero-fade) 100%
   );
   z-index: 1;
 }
@@ -420,6 +333,64 @@
   max-width: 820px;
 }
 
+.dyhs-hero-title {
+  margin: 0 0 14px;
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #f8fafc;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dyhs-hero-subtitle {
+  margin: 0 auto 30px;
+  max-width: 680px;
+  font-size: 18px;
+  color: rgba(248, 250, 252, 0.92);
+  line-height: 1.6;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dyhs-hero-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ─── Scroll Hint ─── */
+.dyhs-scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.dyhs-scroll-mouse {
+  width: 26px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.dyhs-scroll-wheel {
+  width: 3px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 3px;
+  animation: dyhs-scroll-bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes dyhs-scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+}
+
+/* ─── Snow / Fall overlays ─── */
 .dyhs-snow {
   position: fixed;
   inset: 0;
@@ -430,7 +401,6 @@
 .dyhs-snow-dot {
   position: absolute;
   top: -10vh;
-  left: 0;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 999px;
   filter: blur(0.1px);
@@ -440,17 +410,9 @@
 }
 
 @keyframes dyhs-snow-fall {
-  0% {
-    transform: translateY(-10vh) translateX(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(120vh) translateX(var(--drift));
-    opacity: 0.55;
-  }
+  0% { transform: translateY(-10vh) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(120vh) translateX(var(--drift)); opacity: 0.55; }
 }
 
 .dyhs-fall {
@@ -463,7 +425,6 @@
 .dyhs-leaf {
   position: absolute;
   top: -10vh;
-  left: 0;
   opacity: 0.5;
   filter: saturate(1.05);
   animation-name: dyhs-leaf-fall;
@@ -477,139 +438,152 @@
 }
 
 @keyframes dyhs-leaf-fall {
-  0% {
-    transform: translateY(-10vh) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(120vh) translateX(var(--drift)) rotate(var(--rot));
-    opacity: 0.55;
-  }
+  0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(120vh) translateX(var(--drift)) rotate(var(--rot)); opacity: 0.55; }
 }
 
-.dyhs-hero-title {
-  margin: 0 0 10px;
-  font-size: 48px;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: #f8fafc;
-}
-
-.dyhs-hero-subtitle {
-  margin: 0 auto 26px;
-  max-width: 680px;
-  font-size: 18px;
-  color: rgba(248, 250, 252, 0.92);
-}
-
-.dyhs-hero-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
+/* ─── Buttons ─── */
 .dyhs-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  padding: 12px 18px;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 13px 24px;
   text-decoration: none;
   font-weight: 700;
+  font-size: 15px;
   border: 1px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+.dyhs-btn:hover {
+  transform: translateY(-1px);
+}
+
+.dyhs-btn:active {
+  transform: translateY(0);
+}
+
+.dyhs-btn-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .dyhs-btn-primary {
-  background: #0f766e;
+  background: var(--season-accent);
   color: #ffffff;
-  box-shadow: 0 12px 22px rgba(15, 118, 110, 0.25);
+  box-shadow: 0 4px 14px rgba(var(--season-accent-rgb), 0.3);
 }
 
 .dyhs-btn-primary:hover {
-  background: #0b5b55;
+  box-shadow: 0 8px 24px rgba(var(--season-accent-rgb), 0.35);
+}
+
+.dyhs-btn-glow {
+  box-shadow: 0 4px 14px rgba(var(--season-accent-rgb), 0.3), 0 0 40px rgba(var(--season-accent-rgb), 0.1);
+}
+
+.dyhs-btn-glow:hover {
+  box-shadow: 0 8px 24px rgba(var(--season-accent-rgb), 0.35), 0 0 60px rgba(var(--season-accent-rgb), 0.15);
 }
 
 .dyhs-btn-secondary {
-  background: rgba(255, 255, 255, 0.86);
-  color: #0f172a;
-  border-color: rgba(15, 23, 42, 0.08);
+  background: color-mix(in srgb, var(--season-surface) 88%, transparent);
+  color: var(--season-text);
+  border-color: var(--season-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .dyhs-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--season-surface);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .dyhs-btn-orange {
-  background: #f59e0b;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
   color: #0f172a;
-  box-shadow: 0 12px 22px rgba(245, 158, 11, 0.2);
-  border-color: rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+  border-color: transparent;
 }
 
 .dyhs-btn-orange:hover {
-  background: #d97706;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
 }
 
+/* ─── Services Panel ─── */
 .dyhs-seasonal {
   position: relative;
   z-index: 4;
-  margin-top: -120px;
+  margin-top: -80px;
   padding-bottom: 24px;
 }
 
 .dyhs-services-panel {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 26px 22px 24px;
-  box-shadow: 0 20px 45px rgba(2, 6, 23, 0.08);
+  background: var(--season-surface);
+  border-radius: 20px;
+  padding: 28px 24px 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 20px 50px rgba(2, 6, 23, 0.07);
+  border: 1px solid var(--season-border);
   position: relative;
   z-index: 5;
 }
 
+/* ─── Season Selector ─── */
 .dyhs-season-selector {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 0 0 18px;
+  gap: 10px;
+  padding: 0 0 22px;
 }
 
 .dyhs-season-pill {
-  min-width: 42px;
-  padding: 0 14px;
-  height: 36px;
-  border-radius: 999px;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  background: rgba(15, 23, 42, 0.03);
-  color: rgba(15, 23, 42, 0.75);
-  font-weight: 900;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition:
-    min-width 160ms ease,
-    padding 160ms ease,
-    color 160ms ease,
-    background 160ms ease,
-    border-color 160ms ease;
+  gap: 6px;
+  padding: 8px 14px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1.5px solid var(--season-border);
+  background: var(--season-soft);
+  color: var(--season-text);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.dyhs-season-pill:hover {
+  background: var(--season-soft-strong);
+  border-color: var(--season-border-strong);
 }
 
 .dyhs-season-pill.active {
-  background: rgba(15, 118, 110, 0.12);
-  border-color: rgba(15, 118, 110, 0.35);
-  color: rgba(15, 118, 110, 0.95);
+  background: rgba(var(--season-accent-rgb), 0.1);
+  border-color: rgba(var(--season-accent-rgb), 0.3);
+  color: var(--season-accent);
+  padding: 8px 20px;
 }
 
-/* Expand the active season pill (letter -> full word) */
-.dyhs-season-pill.active[aria-selected='true'] {
-  min-width: 120px;
+.dyhs-season-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
+.dyhs-season-label {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ─── Service Cards ─── */
 .dyhs-seasonal-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -617,22 +591,31 @@
 }
 
 .dyhs-service-card {
-  background: #ffffff;
-  border-radius: 12px;
+  background: var(--season-surface);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: none;
-  border: 1px solid rgba(15, 23, 42, 0.05);
-  transition: transform 160ms ease;
+  border: 1px solid var(--season-border);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.dyhs-service-card:hover {
+  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.1);
+}
+
+.dyhs-service-card.active {
+  border-color: rgba(var(--season-accent-rgb), 0.2);
+  box-shadow: 0 8px 30px rgba(var(--season-accent-rgb), 0.12);
 }
 
 .dyhs-service-media {
   width: 100%;
-  height: auto;
-  aspect-ratio: 2 / 3; /* matches 1024x1536 images => no crop with background-size: cover */
+  aspect-ratio: 5 / 7;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #ffffff;
+  background-color: #f1f5f9;
   position: relative;
 }
 
@@ -641,140 +624,116 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 180ms ease;
+  transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
 .dyhs-service-card.active .dyhs-service-media::after {
-  opacity: 0.28;
+  opacity: 0.2;
 }
 
-.dyhs-service-card.dyhs-service-card-spring.active
-  .dyhs-service-media::after {
-  background: rgba(22, 163, 74, 0.55); /* light spring tint */
+.dyhs-service-card.dyhs-service-card-spring.active .dyhs-service-media::after {
+  background: linear-gradient(180deg, transparent 40%, rgba(22, 163, 74, 0.4));
 }
 
-.dyhs-service-card.dyhs-service-card-summer.active
-  .dyhs-service-media::after {
-  background: rgba(245, 158, 11, 0.5); /* light summer tint */
+.dyhs-service-card.dyhs-service-card-summer.active .dyhs-service-media::after {
+  background: linear-gradient(180deg, transparent 40%, rgba(245, 158, 11, 0.4));
 }
 
 .dyhs-service-card.dyhs-service-card-fall.active .dyhs-service-media::after {
-  background: rgba(249, 115, 22, 0.5); /* light fall tint */
+  background: linear-gradient(180deg, transparent 40%, rgba(249, 115, 22, 0.4));
 }
 
-.dyhs-service-card.dyhs-service-card-winter.active
-  .dyhs-service-media::after {
-  background: rgba(2, 132, 199, 0.5); /* light winter tint */
+.dyhs-service-card.dyhs-service-card-winter.active .dyhs-service-media::after {
+  background: linear-gradient(180deg, transparent 40%, rgba(2, 132, 199, 0.4));
 }
 
 .dyhs-service-body {
-  padding: 16px 16px 8px;
+  padding: 18px 18px 8px;
   text-align: center;
+  flex: 1;
 }
 
 .dyhs-service-title {
-  margin: 8px 0 4px;
-  font-size: 20px;
-  line-height: 1.1;
-  color: #0f172a;
-  font-weight: 900;
+  margin: 0 0 6px;
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--season-heading);
+  font-weight: 800;
   letter-spacing: -0.01em;
 }
 
-.dyhs-service-title-spring {
-  color: #16a34a;
-}
-
-.dyhs-service-title-summer {
-  color: #f59e0b;
-}
-
-.dyhs-service-title-fall {
-  color: #f97316;
-}
-
-.dyhs-service-title-winter {
-  color: #0284c7;
-}
+.dyhs-service-title-spring { color: #16a34a; }
+.dyhs-service-title-summer { color: #d97706; }
+.dyhs-service-title-fall { color: #ea580c; }
+.dyhs-service-title-winter { color: #0284c7; }
 
 .dyhs-service-subtitle {
   margin: 0 0 10px;
-  color: rgba(15, 23, 42, 0.7);
+  color: rgba(15, 23, 42, 0.6);
   font-size: 13px;
+  line-height: 1.5;
 }
 
 .dyhs-service-list {
-  list-style: disc;
+  list-style: none;
   text-align: left;
-  padding-left: 18px;
+  padding: 0;
   margin: 10px 0 14px;
-  color: rgba(15, 23, 42, 0.86);
+  color: rgba(15, 23, 42, 0.8);
   font-weight: 600;
   font-size: 13px;
 }
 
+.dyhs-service-list li {
+  padding: 4px 0 4px 20px;
+  position: relative;
+}
+
+.dyhs-service-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--season-accent);
+  opacity: 0.5;
+}
+
 .dyhs-card-btn {
-  display: inline-flex;
-  margin: 14px auto 18px;
-  background: #0f766e;
+  display: block;
+  margin: auto 18px 18px;
+  background: var(--season-accent);
   color: #ffffff;
   text-decoration: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-weight: 800;
-  transition: transform 160ms ease, filter 160ms ease;
-  transform-origin: center;
+  text-align: center;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .dyhs-card-btn:hover {
-  background: #0b5b55;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--season-accent-rgb), 0.25);
 }
 
-/* Expand active season button, shrink others */
-.dyhs-service-card.active .dyhs-card-btn {
-  transform: scale(1.08);
-}
+.dyhs-card-btn-spring { background: #16a34a; }
+.dyhs-card-btn-spring:hover { background: #15803d; }
+.dyhs-card-btn-summer { background: #d97706; }
+.dyhs-card-btn-summer:hover { background: #b45309; }
+.dyhs-card-btn-fall { background: #ea580c; }
+.dyhs-card-btn-fall:hover { background: #c2410c; }
+.dyhs-card-btn-winter { background: #0284c7; }
+.dyhs-card-btn-winter:hover { background: #0369a1; }
 
-.dyhs-service-card:not(.active) .dyhs-card-btn {
-  transform: scale(1);
-  filter: none;
-}
-
-.dyhs-card-btn-spring {
-  background: #16a34a;
-}
-
-.dyhs-card-btn-spring:hover {
-  background: #15803d;
-}
-
-.dyhs-card-btn-summer {
-  background: #f59e0b;
-}
-
-.dyhs-card-btn-summer:hover {
-  background: #d97706;
-}
-
-.dyhs-card-btn-fall {
-  background: #f97316;
-}
-
-.dyhs-card-btn-fall:hover {
-  background: #ea580c;
-}
-
-.dyhs-card-btn-winter {
-  background: #0284c7;
-}
-
-.dyhs-card-btn-winter:hover {
-  background: #0369a1;
-}
-
+/* ─── Sections ─── */
 .dyhs-section {
-  padding: 56px 0;
+  padding: 72px 0;
 }
 
 .dyhs-section-inner {
@@ -782,19 +741,71 @@
 }
 
 .dyhs-section-title {
-  font-size: 30px;
-  margin: 0 0 10px;
-  letter-spacing: -0.02em;
+  font-size: 32px;
+  margin: 0 0 12px;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  color: var(--season-heading);
 }
 
 .dyhs-section-text {
   margin: 0;
-  color: rgba(15, 23, 42, 0.75);
+  color: var(--season-muted);
   font-size: 16px;
-  line-height: 1.6;
-  max-width: 820px;
+  line-height: 1.7;
+  max-width: 620px;
 }
 
+/* ─── About ─── */
+.dyhs-about .dyhs-section-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.dyhs-about-content {
+  max-width: 620px;
+}
+
+.dyhs-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.dyhs-stat-card {
+  background: var(--season-surface);
+  border-radius: 16px;
+  padding: 24px 16px;
+  text-align: center;
+  border: 1px solid var(--season-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dyhs-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.dyhs-stat-value {
+  display: block;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--season-accent);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.dyhs-stat-label {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--season-muted);
+}
+
+/* ─── Gallery ─── */
 .dyhs-gallery {
   padding-top: 0;
 }
@@ -806,88 +817,117 @@
 }
 
 .dyhs-gallery-tile {
-  height: 150px;
-  border-radius: 14px;
+  height: 200px;
+  border-radius: 16px;
   background-size: cover;
   background-position: center;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--season-border);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .dyhs-gallery-tile::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.15), rgba(15, 23, 42, 0.35));
+  background: linear-gradient(180deg, transparent 40%, rgba(15, 23, 42, 0.5));
+  transition: opacity 0.3s;
+}
+
+.dyhs-gallery-tile:hover::after {
+  opacity: 0.8;
 }
 
 .dyhs-gallery-tile-label {
   position: absolute;
-  left: 14px;
-  bottom: 12px;
+  left: 16px;
+  bottom: 14px;
   z-index: 2;
   color: rgba(255, 255, 255, 0.95);
-  font-weight: 800;
-  font-size: 13px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
 }
 
+/* ─── Testimonials ─── */
 .dyhs-testimonials {
-  padding: 56px 0 38px;
-  background: #ffffff;
+  padding: 72px 0 48px;
+  background: var(--season-surface);
 }
 
 .dyhs-testimonials-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 14px;
   flex-wrap: wrap;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
 .dyhs-testimonials-title {
-  text-align: center;
+  text-align: left;
 }
 
 .dyhs-testimonial-controls {
   display: flex;
-  gap: 14px;
+  gap: 8px;
 }
 
 .dyhs-arrow {
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  background: rgba(255, 255, 255, 0.9);
-  color: rgba(15, 23, 42, 0.75);
-  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--season-border);
+  background: var(--season-surface);
+  color: var(--season-text);
+  font-size: 22px;
   font-weight: 700;
   line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+
+.dyhs-arrow:hover {
+  background: var(--season-soft);
+  border-color: var(--season-border-strong);
+  transform: scale(1.05);
+}
+
+.dyhs-testimonial-carousel {
+  overflow: hidden;
+  position: relative;
 }
 
 .dyhs-testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 18px;
 }
 
 .dyhs-testimonial-card {
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 12px 26px rgba(2, 6, 23, 0.06);
+  background: var(--season-surface);
+  border: 1px solid var(--season-border);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(2, 6, 23, 0.04);
+  transition: box-shadow 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.dyhs-testimonial-card:hover {
+  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.08);
+  transform: translateY(-2px);
 }
 
 .dyhs-stars {
   display: flex;
-  gap: 6px;
-  margin-bottom: 10px;
+  gap: 4px;
+  margin-bottom: 14px;
 }
 
 .dyhs-star {
@@ -897,10 +937,12 @@
 }
 
 .dyhs-testimonial-text {
-  margin: 0 0 16px;
-  color: rgba(15, 23, 42, 0.82);
-  line-height: 1.6;
-  font-weight: 600;
+  margin: 0 0 18px;
+  color: var(--season-text);
+  line-height: 1.65;
+  font-weight: 500;
+  font-size: 15px;
+  flex: 1;
 }
 
 .dyhs-person {
@@ -910,225 +952,453 @@
 }
 
 .dyhs-avatar {
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(15, 118, 110, 0.12);
-  border: 1px solid rgba(15, 118, 110, 0.18);
-  color: #0f766e;
-  font-weight: 900;
+  background: rgba(var(--season-accent-rgb), 0.12);
+  border: 1.5px solid rgba(var(--season-accent-rgb), 0.24);
+  color: var(--season-accent);
+  font-weight: 800;
+  font-size: 14px;
 }
 
 .dyhs-person-meta {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .dyhs-person-name {
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--season-heading);
 }
 
 .dyhs-person-role {
-  font-size: 13px;
-  color: rgba(15, 23, 42, 0.6);
-  font-weight: 700;
-}
-
-.dyhs-review-btn {
-  display: inline-flex;
-  margin: 16px auto 0;
-  background: #0f766e;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 8px;
-  padding: 10px 18px;
-  font-weight: 800;
-  width: fit-content;
-}
-
-.dyhs-review-btn:hover {
-  background: #0b5b55;
+  font-size: 12px;
+  color: var(--season-muted);
+  font-weight: 600;
 }
 
 .dyhs-testimonial-dots {
   display: flex;
   gap: 8px;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: 24px;
 }
 
 .dyhs-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 999px;
-  background: rgba(15, 23, 42, 0.18);
+  background: rgba(var(--season-accent-rgb), 0.28);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.dyhs-dot:hover {
+  background: rgba(var(--season-accent-rgb), 0.48);
 }
 
 .dyhs-dot-active {
-  background: rgba(15, 118, 110, 0.95);
+  background: var(--season-accent);
+  transform: scale(1.3);
 }
 
+/* ─── Contact ─── */
 .dyhs-contact {
-  padding: 46px 0 64px;
+  padding: 48px 0 72px;
 }
 
 .dyhs-contact-card {
-  background: #0b3b36;
-  background: linear-gradient(135deg, #0f766e, #0b5b55);
-  border-radius: 18px;
-  padding: 28px;
+  background: linear-gradient(135deg, var(--season-contact-1) 0%, var(--season-contact-2) 50%, var(--season-contact-1) 100%);
+  background-size: 200% 200%;
+  animation: dyhs-gradient-shift 8s ease infinite;
+  border-radius: 24px;
+  padding: 48px 36px;
   color: #ffffff;
-  box-shadow: 0 20px 50px rgba(15, 118, 110, 0.25);
+  box-shadow: 0 8px 30px rgba(var(--season-accent-rgb), 0.25), 0 0 80px rgba(var(--season-accent-rgb), 0.08);
+  text-align: center;
+}
+
+@keyframes dyhs-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .dyhs-contact-card .dyhs-section-title {
   margin-bottom: 12px;
   color: #ffffff;
+  text-align: center;
 }
 
 .dyhs-contact-card .dyhs-section-text {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .dyhs-contact-actions {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 16px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.dyhs-contact-actions .dyhs-btn-primary {
+  background: #ffffff;
+  color: var(--season-accent);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.dyhs-contact-actions .dyhs-btn-primary:hover {
+  background: color-mix(in srgb, var(--season-surface) 88%, var(--season-soft));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .dyhs-contact-actions .dyhs-btn-secondary {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
   color: #ffffff;
+  backdrop-filter: blur(4px);
 }
 
 .dyhs-contact-actions .dyhs-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .dyhs-contact-note {
-  margin: 12px 0 0;
-  color: rgba(255, 255, 255, 0.78);
-  font-weight: 600;
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
   font-size: 13px;
 }
 
+/* ─── Footer ─── */
 .dyhs-footer {
-  padding: 18px 0 26px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  background: #ffffff;
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--season-border);
+  background: var(--season-surface);
 }
 
-.dyhs-footer span {
-  color: rgba(15, 23, 42, 0.72);
-  font-weight: 700;
+.dyhs-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
+.dyhs-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dyhs-footer-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.dyhs-footer-copy {
+  color: var(--season-muted);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.dyhs-footer-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.dyhs-footer-nav a {
+  color: var(--season-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.15s;
+}
+
+.dyhs-footer-nav a:hover {
+  color: var(--season-accent);
+}
+
+/* ─── Responsive: Tablet (≤1024px) ─── */
 @media (max-width: 1024px) {
   .dyhs-hero-title {
-    font-size: 36px;
+    font-size: 40px;
   }
+
   .dyhs-hero {
-    padding: 108px 0 40px;
+    padding: 110px 0 80px;
   }
+
   .dyhs-seasonal {
-    margin-top: -55px;
+    margin-top: -50px;
   }
+
   .dyhs-seasonal-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .dyhs-testimonial-grid {
     grid-template-columns: 1fr;
   }
+
   .dyhs-gallery-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .dyhs-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .dyhs-testimonials-header {
     flex-direction: column;
     text-align: center;
-    justify-content: center;
+    align-items: center;
   }
-}
 
-@media (max-width: 540px) {
-  .dyhs-container {
-    padding: 0 14px;
+  .dyhs-testimonials-title {
+    text-align: center;
   }
-  .dyhs-logo {
-    width: 70px;
-    height: 70px;
-  }
-  .dyhs-nav {
-    gap: 14px;
-  }
+
   .dyhs-nav {
     display: none;
   }
+
   .dyhs-burger {
     display: inline-flex;
   }
-  .dyhs-hero-title {
-    font-size: 30px;
+}
+
+/* ─── Responsive: Mobile (≤640px) ─── */
+@media (max-width: 640px) {
+  .dyhs-container {
+    padding: 0 16px;
   }
-  .dyhs-hero-subtitle {
-    font-size: 16px;
-    margin-bottom: 14px;
+
+  .dyhs-logo {
+    width: 48px;
+    height: 48px;
   }
+
+  .dyhs-header-inner {
+    padding: 10px 16px;
+  }
+
   .dyhs-hero {
-    min-height: 420px;
-    padding: 105px 0 18px;
-    align-items: flex-start; /* keep text/buttons on the visible part of the image */
+    min-height: auto;
+    padding: 100px 0 60px;
   }
+
+  .dyhs-hero-title {
+    font-size: 28px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .dyhs-hero-subtitle {
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
   .dyhs-hero-actions {
-    margin-top: -6px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 0 8px;
   }
-  .dyhs-seasonal {
-    margin-top: -235px;
-  }
-  .dyhs-hero-bg {
-    background-size: 100% auto;
-    background-position: center top;
-  }
-  .dyhs-hero-grad {
-    background: linear-gradient(
-      180deg,
-      rgba(15, 23, 42, 0.45) 0%,
-      rgba(15, 23, 42, 0.16) 45%,
-      rgba(246, 247, 251, 0.55) 100%
-    );
-  }
-  .dyhs-services-panel {
-    padding: 18px 14px 16px;
-  }
-  .dyhs-service-body {
-    padding: 14px 14px 16px;
-  }
-  .dyhs-service-title {
-    font-size: 18px;
-  }
-  .dyhs-service-list {
-    font-size: 12px;
-  }
-  .dyhs-testimonials-header {
-    margin-bottom: 12px;
-  }
-  .dyhs-testimonial-controls {
+
+  .dyhs-btn {
+    padding: 14px 20px;
+    font-size: 15px;
     justify-content: center;
+    width: 100%;
+    max-width: 260px;
   }
+
+  .dyhs-scroll-hint {
+    display: none;
+  }
+
+  .dyhs-seasonal {
+    margin-top: -30px;
+  }
+
+  .dyhs-services-panel {
+    padding: 16px 12px 14px;
+    border-radius: 16px;
+  }
+
   .dyhs-seasonal-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
+
+  .dyhs-service-media {
+    aspect-ratio: 4 / 3;
+  }
+
   .dyhs-season-selector {
-    gap: 10px;
+    gap: 6px;
     padding-bottom: 14px;
     flex-wrap: wrap;
+    justify-content: center;
   }
+
+  .dyhs-season-pill {
+    padding: 6px 10px;
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .dyhs-season-pill.active {
+    padding: 6px 16px;
+  }
+
+  .dyhs-section {
+    padding: 40px 0;
+  }
+
+  .dyhs-section-title {
+    font-size: 24px;
+  }
+
+  .dyhs-section-text {
+    font-size: 15px;
+  }
+
+  .dyhs-about .dyhs-section-inner {
+    gap: 28px;
+  }
+
+  .dyhs-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .dyhs-stat-card {
+    padding: 18px 12px;
+  }
+
+  .dyhs-stat-value {
+    font-size: 24px;
+  }
+
+  .dyhs-stat-label {
+    font-size: 12px;
+  }
+
   .dyhs-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .dyhs-gallery-tile {
+    height: 150px;
+    border-radius: 12px;
+  }
+
+  .dyhs-testimonials {
+    padding: 40px 0 32px;
+  }
+
+  .dyhs-testimonial-card {
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .dyhs-testimonial-text {
+    font-size: 14px;
+  }
+
+  .dyhs-contact {
+    padding: 32px 0 48px;
+  }
+
+  .dyhs-contact-card {
+    padding: 28px 18px;
+    border-radius: 16px;
+  }
+
+  .dyhs-contact-card .dyhs-section-title {
+    font-size: 24px;
+  }
+
+  .dyhs-contact-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dyhs-contact-actions .dyhs-btn {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .dyhs-footer {
+    padding: 20px 0 28px;
+  }
+
+  .dyhs-footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .dyhs-footer-brand {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .dyhs-footer-copy {
+    font-size: 13px;
+  }
+
+  .dyhs-footer-nav {
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .dyhs-footer-nav a {
+    font-size: 13px;
+  }
+}
+
+/* ─── Responsive: Small phones (≤380px) ─── */
+@media (max-width: 380px) {
+  .dyhs-hero-title {
+    font-size: 24px;
+  }
+
+  .dyhs-hero-subtitle {
+    font-size: 14px;
+  }
+
+  .dyhs-hero {
+    padding: 90px 0 50px;
+  }
+
+  .dyhs-seasonal {
+    margin-top: -20px;
+  }
+
+  .dyhs-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dyhs-stats-grid {
     grid-template-columns: 1fr;
   }
 }
