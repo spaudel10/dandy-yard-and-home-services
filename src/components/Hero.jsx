@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 export default function Hero({ activeSeason, snowDots, fallLeaves }) {
   return (
-    <section className="dyhs-hero" aria-label="Year round services">
+    <section className="dyhs-hero" aria-label="Dandy Yard and Home Services">
       <div
         className="dyhs-hero-bg"
         style={{ backgroundImage: 'url(/backgroundimage.png)' }}
@@ -31,7 +31,7 @@ export default function Hero({ activeSeason, snowDots, fallLeaves }) {
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          Year-Round Yard &amp; Home Services
+          Dandy Yard &amp; Home Services
         </motion.h1>
         <motion.p
           className="dyhs-hero-subtitle"
