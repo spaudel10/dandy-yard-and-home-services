@@ -94,30 +94,27 @@ html {
   padding: 0 20px;
 }
 
-/* ─── Header ─── */
+/* ─── Header (season-tinted bar + readable text on the light hero) ─── */
 .dyhs-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
-  background: transparent;
-  transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+  background: color-mix(in srgb, var(--season-bg) 86%, transparent);
+  backdrop-filter: blur(12px) saturate(1.35);
+  -webkit-backdrop-filter: blur(12px) saturate(1.35);
+  border-bottom: 1px solid color-mix(in srgb, var(--season-border) 55%, transparent);
+  transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
 
 .dyhs-header.scrolled {
-  background: color-mix(in srgb, var(--season-surface) 78%, transparent);
+  background: color-mix(in srgb, var(--season-surface) 88%, var(--season-bg));
   backdrop-filter: blur(16px) saturate(1.6);
   -webkit-backdrop-filter: blur(16px) saturate(1.6);
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.04);
-}
-
-.dyhs-header.scrolled .dyhs-nav a {
-  color: var(--season-text);
-}
-
-.dyhs-header.scrolled .dyhs-nav a:hover {
-  color: var(--season-accent);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.05);
+  border-bottom-color: var(--season-border);
 }
 
 .dyhs-header-inner {
@@ -149,13 +146,12 @@ html {
   width: 72px;
   height: 72px;
   border-radius: 12px;
-  /* Soft halo so logo reads on dark hero without a box */
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.35));
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.12));
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .dyhs-header.scrolled .dyhs-logo {
-  filter: drop-shadow(0 1px 3px rgba(15, 23, 42, 0.12));
+  filter: drop-shadow(0 1px 3px rgba(15, 23, 42, 0.1));
 }
 
 .dyhs-brand.dyhs-logo:hover {
@@ -170,7 +166,7 @@ html {
 
 .dyhs-nav a {
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--season-text);
   text-decoration: none;
   font-size: 14px;
   padding: 6px 14px;
@@ -179,12 +175,8 @@ html {
 }
 
 .dyhs-nav a:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.dyhs-header.scrolled .dyhs-nav a:hover {
-  background: rgba(var(--season-accent-rgb), 0.1);
+  color: var(--season-accent);
+  background: rgba(var(--season-accent-rgb), 0.12);
 }
 
 /* ─── Burger ─── */
@@ -193,13 +185,13 @@ html {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--season-border);
+  background: color-mix(in srgb, var(--season-surface) 80%, transparent);
   backdrop-filter: blur(8px);
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .dyhs-header.scrolled .dyhs-burger {
@@ -220,7 +212,7 @@ html {
 .dyhs-burger-lines span {
   width: 18px;
   height: 2px;
-  background: rgba(255, 255, 255, 0.95);
+  background: color-mix(in srgb, var(--season-text) 88%, transparent);
   border-radius: 2px;
   transition: background 0.2s;
 }
@@ -303,101 +295,316 @@ html {
   transform: translateX(4px);
 }
 
-/* ─── Hero ─── */
+/* ─── Hero: 50% text | 70% image, 20% overlap — original season palette (surface + bg mix) ─── */
 .dyhs-hero {
+  --hero-copy-bg: color-mix(in srgb, var(--season-surface) 94%, var(--season-bg));
+
   position: relative;
   min-height: 100svh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 0 100px;
+  flex-direction: column;
+  padding: clamp(4.75rem, 10vw, 6.25rem) 0 clamp(3.25rem, 8vw, 5rem);
   overflow: hidden;
+  box-sizing: border-box;
+  background: var(--season-bg);
 }
 
-.dyhs-hero-bg {
+.dyhs-hero-split {
+  /* 50% + 70% − 100% = 20% overlap (viewport 30%–50%) */
+  --hero-text-w: 50%;
+  --hero-image-w: 70%;
+
+  flex: 1;
+  position: relative;
+  width: 100%;
+  min-height: min(76vh, 780px);
+  box-sizing: border-box;
+}
+
+/* Image: 70% width, anchored right → occupies 30%–100% (20% overlaps text 0–50%) */
+.dyhs-hero-visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: calc(100% - var(--hero-image-w));
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Mask: alpha — transparent = hide image, #fff = show. Overlap = 20% viewport = 20/70 ≈ 28.57% of this 70%-wide layer */
+.dyhs-hero-visual-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: saturate(1.1) contrast(1.02);
-  z-index: 0;
+  filter: saturate(1.06) contrast(1.03);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 9%,
+    rgba(255, 255, 255, 0.72) 21%,
+    #fff 28.6%,
+    #fff 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 9%,
+    rgba(255, 255, 255, 0.72) 21%,
+    #fff 28.6%,
+    #fff 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-mode: alpha;
 }
 
-.dyhs-hero-grad {
+/* Text: 50% width; scrim = copy bg fading out (same mix as before — no extra tint tokens) */
+.dyhs-hero-copy {
+  position: relative;
+  z-index: 2;
+  width: var(--hero-text-w);
+  max-width: none;
+  min-height: min(76vh, 780px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem) clamp(1.25rem, 2.5vw, 2rem);
+  box-sizing: border-box;
+  background: linear-gradient(
+    90deg,
+    var(--hero-copy-bg) 0%,
+    var(--hero-copy-bg) 52%,
+    color-mix(in srgb, var(--hero-copy-bg) 82%, transparent) 72%,
+    color-mix(in srgb, var(--hero-copy-bg) 35%, transparent) 92%,
+    transparent 100%
+  );
+  border: none;
+}
+
+.dyhs-hero-copy-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 28rem;
+  padding-left: clamp(14px, 2.2vw, 22px);
+}
+
+/* Editorial rail + soft wash — decorative only, not a boxed card */
+.dyhs-hero-copy-inner::before {
+  content: '';
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0.1em;
+  bottom: 4.5rem;
+  width: 3px;
+  border-radius: 3px;
   background: linear-gradient(
     180deg,
-    rgba(15, 23, 42, 0.6) 0%,
-    rgba(15, 23, 42, 0.25) 40%,
-    var(--season-hero-fade) 100%
+    var(--season-accent) 0%,
+    color-mix(in srgb, var(--season-accent) 28%, transparent) 100%
   );
-  z-index: 1;
+  opacity: 0.88;
+  pointer-events: none;
 }
 
-.dyhs-hero-content {
-  position: relative;
-  text-align: center;
-  z-index: 3;
-  max-width: 820px;
+.dyhs-hero-copy-inner::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  right: -8%;
+  top: -12%;
+  width: min(160px, 42vw);
+  height: min(160px, 42vw);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--season-accent-rgb), 0.14) 0%,
+    rgba(var(--season-accent-rgb), 0.04) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.dyhs-hero-kicker-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: clamp(12px, 2.5vw, 18px);
+}
+
+.dyhs-hero-kicker-line {
+  width: 36px;
+  height: 3px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    var(--season-accent),
+    color-mix(in srgb, var(--season-accent) 35%, transparent)
+  );
+}
+
+.dyhs-hero-kicker {
+  margin: 0;
+  font-size: clamp(0.7rem, 1.1vw + 0.45rem, 0.8125rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--season-accent);
 }
 
 .dyhs-hero-title {
-  margin: 0 0 14px;
-  font-size: 52px;
+  margin: 0 0 clamp(14px, 2.5vw, 22px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(6px, 1.5vw, 12px);
+  text-align: left;
+}
+
+.dyhs-hero-title-lead {
+  display: block;
+  font-size: clamp(1.125rem, 2vw + 0.65rem, 1.75rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--season-heading);
+}
+
+.dyhs-hero-title-lead::after {
+  content: '';
+  display: block;
+  width: 2.75rem;
+  height: 2px;
+  margin-top: 0.55rem;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--season-accent),
+    color-mix(in srgb, var(--season-accent) 25%, transparent)
+  );
+  opacity: 0.9;
+}
+
+.dyhs-hero-title-em {
+  display: block;
+  font-size: clamp(1.85rem, 3.2vw + 0.85rem, 3.125rem);
+  font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.03em;
-  color: #f8fafc;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.035em;
+  color: var(--season-text);
+}
+
+.dyhs-hero-title-accent {
+  color: var(--season-accent);
 }
 
 .dyhs-hero-subtitle {
-  margin: 0 auto 30px;
-  max-width: 680px;
-  font-size: 18px;
-  color: rgba(248, 250, 252, 0.92);
-  line-height: 1.6;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+  margin: 0 0 clamp(22px, 4vw, 30px);
+  max-width: 38rem;
+  font-size: clamp(0.9375rem, 1.15vw + 0.7rem, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.62;
+  color: var(--season-muted);
 }
 
 .dyhs-hero-actions {
   display: flex;
-  gap: 14px;
-  justify-content: center;
+  gap: clamp(10px, 2vw, 14px);
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
-/* ─── Scroll Hint ─── */
-.dyhs-scroll-hint {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-}
+@media (max-width: 900px) {
+  .dyhs-hero-split {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
 
-.dyhs-scroll-mouse {
-  width: 26px;
-  height: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 14px;
-  display: flex;
-  justify-content: center;
-  padding-top: 8px;
-}
+  /* Image first — no feathered mask, crisp edge */
+  .dyhs-hero-visual {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    order: 1;
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: min(36vh, 320px);
+    max-height: 46vh;
+    pointer-events: auto;
+    border-bottom: 1px solid color-mix(in srgb, var(--season-border) 85%, transparent);
+  }
 
-.dyhs-scroll-wheel {
-  width: 3px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 3px;
-  animation: dyhs-scroll-bounce 1.8s ease-in-out infinite;
-}
+  .dyhs-hero-visual-bg {
+    -webkit-mask-image: none;
+    mask-image: none;
+    filter: saturate(1.04) contrast(1.02);
+  }
 
-@keyframes dyhs-scroll-bounce {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(8px); opacity: 0.3; }
+  .dyhs-hero-copy {
+    order: 2;
+    width: 100%;
+    min-height: 0;
+    background: var(--hero-copy-bg);
+    padding: clamp(1.5rem, 4.5vw, 2rem) clamp(1.25rem, 5vw, 1.75rem) clamp(2rem, 6vw, 2.75rem);
+    border: none;
+  }
+
+  .dyhs-hero-copy-inner {
+    max-width: 40rem;
+    margin-inline: 0;
+    text-align: left;
+    padding-left: 0;
+  }
+
+  .dyhs-hero-copy-inner::before {
+    display: none;
+  }
+
+  .dyhs-hero-copy-inner::after {
+    display: none;
+  }
+
+  .dyhs-hero-title-lead {
+    display: block;
+  }
+
+  .dyhs-hero-title {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .dyhs-hero-kicker-row {
+    justify-content: flex-start;
+  }
+
+  .dyhs-hero-subtitle {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+
+  .dyhs-hero-actions {
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .dyhs-hero-actions .dyhs-btn {
+    width: 100%;
+    max-width: none;
+    justify-content: center;
+  }
 }
 
 /* ─── Snow / Fall overlays ─── */
@@ -540,6 +747,66 @@ html {
   border: 1px solid var(--season-border);
   position: relative;
   z-index: 5;
+}
+
+.dyhs-more-services {
+  margin-top: 22px;
+  padding: 24px 22px;
+  background: var(--season-surface);
+  border-radius: 20px;
+  border: 1px solid var(--season-border);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 12px 36px rgba(2, 6, 23, 0.05);
+}
+
+.dyhs-more-services-title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--season-heading);
+}
+
+.dyhs-more-services-intro {
+  margin: 0 0 16px;
+  font-size: 15px;
+  color: var(--season-muted);
+  line-height: 1.5;
+}
+
+.dyhs-more-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.dyhs-more-service-card {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--season-border);
+  background: var(--season-surface);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dyhs-more-service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.09);
+}
+
+.dyhs-more-service-media {
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dyhs-more-service-label {
+  margin: 0;
+  padding: 12px 12px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--season-heading);
+  text-align: center;
 }
 
 /* ─── Season Selector ─── */
@@ -1084,11 +1351,21 @@ html {
   background: rgba(255, 255, 255, 0.25);
 }
 
-.dyhs-contact-note {
-  margin: 16px 0 0;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 500;
-  font-size: 13px;
+.dyhs-contact-actions .dyhs-btn-whatsapp {
+  background: #25d366;
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+.dyhs-contact-actions .dyhs-btn-whatsapp:hover {
+  background: #1ebe57;
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.45);
+}
+
+.dyhs-contact-actions .dyhs-btn-whatsapp .dyhs-btn-icon {
+  width: 20px;
+  height: 20px;
 }
 
 /* ─── Footer ─── */
@@ -1144,14 +1421,6 @@ html {
 
 /* ─── Responsive: Tablet (≤1024px) ─── */
 @media (max-width: 1024px) {
-  .dyhs-hero-title {
-    font-size: 40px;
-  }
-
-  .dyhs-hero {
-    padding: 110px 0 80px;
-  }
-
   .dyhs-seasonal {
     margin-top: -50px;
   }
@@ -1209,26 +1478,16 @@ html {
 
   .dyhs-hero {
     min-height: auto;
-    padding: 100px 0 60px;
+    padding: clamp(5.25rem, 16vw, 6.25rem) 0 clamp(2.75rem, 10vw, 4.5rem);
   }
 
   .dyhs-hero-title {
-    font-size: 28px;
-    line-height: 1.15;
-    margin-bottom: 10px;
-  }
-
-  .dyhs-hero-subtitle {
-    font-size: 15px;
-    margin-bottom: 20px;
-    line-height: 1.5;
+    line-height: 1.12;
   }
 
   .dyhs-hero-actions {
-    flex-direction: column;
-    align-items: center;
     gap: 10px;
-    padding: 0 8px;
+    padding: 0;
   }
 
   .dyhs-btn {
@@ -1239,8 +1498,8 @@ html {
     max-width: 260px;
   }
 
-  .dyhs-scroll-hint {
-    display: none;
+  .dyhs-hero-actions .dyhs-btn {
+    max-width: 100%;
   }
 
   .dyhs-seasonal {
@@ -1250,6 +1509,20 @@ html {
   .dyhs-services-panel {
     padding: 16px 12px 14px;
     border-radius: 16px;
+  }
+
+  .dyhs-more-services {
+    margin-top: 16px;
+    padding: 18px 14px;
+    border-radius: 16px;
+  }
+
+  .dyhs-more-services-title {
+    font-size: 19px;
+  }
+
+  .dyhs-more-services-grid {
+    grid-template-columns: 1fr;
   }
 
   .dyhs-seasonal-grid {
@@ -1389,16 +1662,8 @@ html {
 
 /* ─── Responsive: Small phones (≤380px) ─── */
 @media (max-width: 380px) {
-  .dyhs-hero-title {
-    font-size: 24px;
-  }
-
-  .dyhs-hero-subtitle {
-    font-size: 14px;
-  }
-
   .dyhs-hero {
-    padding: 90px 0 50px;
+    padding: 5rem 0 2.75rem;
   }
 
   .dyhs-seasonal {

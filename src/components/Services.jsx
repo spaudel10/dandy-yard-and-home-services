@@ -27,6 +27,22 @@ const SEASON_ICONS = {
   ),
 }
 
+/** All 12 photoreal assets in public/services/ (1–4 align with seasonal packages; 5–12 from notr.note) */
+const SERVICE_PHOTOS_ALL = [
+  { label: 'Spring Lawn Setup', image: '/services/1_Spring_Lawn_Setup_Photoreal_1_20260329_001609.png' },
+  { label: 'Summer Maintenance', image: '/services/2_Summer_Maintenance_Bright_su_1_20260329_001642.png' },
+  { label: 'Fall Cleanup', image: '/services/3_Fall_Cleanup_Autumn_afternoo_1_20260329_001706.png' },
+  { label: 'Winter Snow Services', image: '/services/4_Winter_Snow_Services_Blue_ho_1_20260329_001726.png' },
+  { label: 'Snow removal', image: '/services/5_Snow_removal_Action_capable_1_20260329_001741.png' },
+  { label: 'Lawn maintenance', image: '/services/6_Lawn_maintenance_Recurring_c_1_20260329_001757.png' },
+  { label: 'Tree and shrub trimming', image: '/services/7_Tree_and_shrub_trimming_Arbo_1_20260329_001820.png' },
+  { label: 'Junk removal', image: '/services/8_Junk_removal_Before_after_si_1_20260329_001840.png' },
+  { label: 'Small landscaping jobs', image: '/services/9_Small_landscaping_jobs_Fresh_1_20260329_001856.png' },
+  { label: 'Small engine repair and maintenance', image: '/services/10_Small_engine_repair_and_mainte_1_20260329_001911.png' },
+  { label: 'Golf cart repair and maintenance', image: '/services/11_Golf_cart_repair_and_maintenan_1_20260329_001927.png' },
+  { label: 'Small handyman house repairs', image: '/services/12_Small_handyman_house_repairs_1_20260329_001941.png' },
+]
+
 const services = [
   {
     key: 'spring',
@@ -159,6 +175,25 @@ export default function Services({ activeSeason, setActiveSeason }) {
             </AnimatePresence>
           </motion.div>
         </motion.div>
+
+        <div className="dyhs-more-services">
+          <h2 className="dyhs-more-services-title">All services</h2>
+          <p className="dyhs-more-services-intro">
+            Seasonal packages and year-round help—every service we offer:
+          </p>
+          <div className="dyhs-more-services-grid" role="list">
+            {SERVICE_PHOTOS_ALL.map((item) => (
+              <article key={item.image} className="dyhs-more-service-card" role="listitem">
+                <div
+                  className="dyhs-more-service-media"
+                  style={{ backgroundImage: `url(${item.image})` }}
+                  aria-hidden="true"
+                />
+                <p className="dyhs-more-service-label">{item.label}</p>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
