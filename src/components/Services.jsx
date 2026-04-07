@@ -78,7 +78,7 @@ const services = [
   
 ]
 
-const SMALL_ENGINE_IMAGE = encodeURI('small engine.png')
+const SMALL_ENGINE_IMAGE = encodeURI('/small engine repair image.PNG')
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30, scale: 0.95 },

@@ -1588,9 +1588,41 @@ html {
   font-size: 14px;
 }
 
+.dyhs-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
 .dyhs-footer-nav {
   display: flex;
   gap: 20px;
+}
+
+.dyhs-footer-fb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--season-muted);
+  background: var(--season-soft);
+  border: 1px solid var(--season-border);
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.dyhs-footer-fb:hover {
+  color: #ffffff;
+  background: #1877f2;
+  border-color: #1877f2;
+  transform: translateY(-1px);
+}
+
+.dyhs-footer-fb-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .dyhs-footer-nav a {
@@ -1847,6 +1879,12 @@ html {
 
   .dyhs-footer-copy {
     font-size: 13px;
+  }
+
+  .dyhs-footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
   }
 
   .dyhs-footer-nav {
