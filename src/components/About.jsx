@@ -2,8 +2,8 @@ import { motion } from 'framer-motion'
 import AnimatedSection from './AnimatedSection'
 
 const stats = [
-  { value: '5+', label: 'Years Experience' },
-  { value: '200+', label: 'Happy Clients' },
+  { value: '20+', label: 'Years Experience' },
+  { value: '350+', label: 'Happy Clients' },
   { value: '4', label: 'Seasons Covered' },
   { value: '100%', label: 'Satisfaction' },
 ]
