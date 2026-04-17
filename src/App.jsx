@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import Services from './components/Services'
 import About from './components/About'
+import ServiceArea from './components/ServiceArea'
 import Gallery from './components/Gallery'
 import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
@@ -52,6 +53,7 @@ export default function App() {
       <Hero activeSeason={activeSeason} snowDots={snowDots} fallLeaves={fallLeaves} />
       <Services activeSeason={activeSeason} setActiveSeason={setActiveSeason} />
       <About />
+      <ServiceArea />
       <Gallery />
       <Testimonials />
       <Contact />

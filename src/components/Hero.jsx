@@ -42,9 +42,9 @@ export default function Hero({ activeSeason, snowDots, fallLeaves }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="dyhs-hero-title-lead">Beautiful outdoor spaces.</span>
+              <span className="dyhs-hero-title-lead">Local yard and lawn care.</span>
               <span className="dyhs-hero-title-em">
-                <span className="dyhs-hero-title-accent">Dependable</span> help at home.
+                <span className="dyhs-hero-title-accent">Dependable</span> home service for every season.
               </span>
             </Motion.h1>
 
@@ -54,8 +54,7 @@ export default function Hero({ activeSeason, snowDots, fallLeaves }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
             >
-              Mowing, seasonal cleanup, snow removal, and small repairs—with clear communication and care
-              for your property, every visit.
+            Comprehensive seasonal yard care: precision mowing, thorough cleanups, prompt snow removal, and expert small repairs.
             </Motion.p>
 
             <Motion.div

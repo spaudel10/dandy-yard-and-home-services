@@ -158,6 +158,86 @@ html {
   transform: scale(1.04);
 }
 
+.dyhs-service-area {
+  padding: 72px 0 48px;
+}
+
+.dyhs-service-area-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.dyhs-service-area-note {
+  max-width: 480px;
+  color: var(--season-muted);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.dyhs-service-area-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.dyhs-service-area-card {
+  background: var(--season-surface);
+  border: 1px solid var(--season-border);
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: 0 24px 40px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.dyhs-service-area-card-title {
+  font-size: clamp(1.15rem, 1.2vw, 1.35rem);
+  margin: 0;
+  color: var(--season-heading);
+}
+
+.dyhs-service-area-card-copy {
+  margin: 0;
+  color: var(--season-text);
+  line-height: 1.7;
+}
+
+.dyhs-service-area-card .dyhs-btn {
+  margin-top: auto;
+}
+
+.dyhs-service-area-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.dyhs-service-area-action .dyhs-btn {
+  min-width: 260px;
+  padding: 16px 24px;
+}
+
+@media (max-width: 900px) {
+  .dyhs-service-area-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .dyhs-service-area-top {
+    flex-direction: column;
+  }
+
+  .dyhs-service-area-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .dyhs-nav {
   display: flex;
   gap: 8px;
@@ -1537,21 +1617,83 @@ html {
   background: rgba(255, 255, 255, 0.25);
 }
 
-.dyhs-contact-actions .dyhs-btn-whatsapp {
-  background: #25d366;
+.dyhs-contact-form {
+  margin-top: 32px;
+  text-align: left;
+}
+
+.dyhs-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.dyhs-contact-field,
+.dyhs-contact-message {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.dyhs-contact-field input,
+.dyhs-contact-message textarea {
+  width: 100%;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
-  border-color: transparent;
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+  padding: 14px 16px;
+  font: inherit;
+  backdrop-filter: blur(8px);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.dyhs-contact-actions .dyhs-btn-whatsapp:hover {
-  background: #1ebe57;
-  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.45);
+.dyhs-contact-field input:focus,
+.dyhs-contact-message textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
-.dyhs-contact-actions .dyhs-btn-whatsapp .dyhs-btn-icon {
-  width: 20px;
-  height: 20px;
+.dyhs-contact-field input::placeholder,
+.dyhs-contact-message textarea::placeholder {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.dyhs-contact-message textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.dyhs-contact-submit {
+  margin-top: 24px;
+  width: 100%;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.dyhs-contact-submit:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.dyhs-contact-submit:active {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 760px) {
+  .dyhs-contact-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ─── Footer ─── */

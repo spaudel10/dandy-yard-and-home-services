@@ -6,9 +6,17 @@ export default function Footer() {
       <div className="dyhs-container dyhs-footer-inner">
         <div className="dyhs-footer-brand">
           <div className="dyhs-footer-logo" role="img" aria-label="Dandy Yard and Home Services" />
-          <span className="dyhs-footer-copy">
-            © {year} Dandy Yard and Home Services. All rights reserved.
-          </span>
+          <div>
+            <span className="dyhs-footer-copy dyhs-footer-service-area">
+
+              Serving Taber, Lethbridge, and Coaldale.
+            </span>
+            <span className="dyhs-footer-copy">
+              
+              © {year} Dandy Yard and Home Services. All rights reserved.
+            </span>
+
+          </div>
         </div>
         <div className="dyhs-footer-links">
           <nav className="dyhs-footer-nav" aria-label="Footer">

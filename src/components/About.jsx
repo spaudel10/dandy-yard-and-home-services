@@ -15,9 +15,15 @@ export default function About() {
         <div className="dyhs-about-content">
           <h2 className="dyhs-section-title">About Us</h2>
           <p className="dyhs-section-text">
-            We help homeowners keep their yards and entrances looking great year-round with dependable
-            seasonal service and friendly communication. From the first thaw of spring to the last snowfall
-            of winter, we've got your property covered.
+            We provide professional lawn care and yard maintenance services to keep your property looking beautiful
+            and well-maintained year-round. With over 20 years of experience, our lawn and yard care team delivers
+            dependable seasonal service, snow removal, small home repairs, small engine repairs, and golf cart maintenance.
+            We pride ourselves on clear communication, attention to detail, and genuine care for every property and equipment we serve.
+          </p>
+          <p className="dyhs-section-text dyhs-service-area-copy">
+            Serving Taber, Lethbridge, Bow Island, and Coaldale with trusted lawn care, yard maintenance, snow removal,
+            small home repairs, small engine repair and maintenance, and golf cart repair services. Whether you need spring lawn setup,
+            summer lawn mowing, fall yard cleanup, winter snow removal, or equipment maintenance—we're your local yard and property services partner.
           </p>
         </div>
         <div className="dyhs-stats-grid">
