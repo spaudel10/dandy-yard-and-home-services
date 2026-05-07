@@ -1,0 +1,5 @@
+# Publish the Vite `dist` folder so sitemap.xml, robots.txt, and /public assets are deployed.
+# If publish was the repo root, `/sitemap.xml` would 404 or fall through to a generic HTML page.
+[build]
+  command = "npm run build"
+  publish = "dist"
