@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Header({ menuOpen, setMenuOpen }) {
+  const { pathname } = useLocation()
   const [scrolled, setScrolled] = useState(false)
+
+  const sectionHref = (id) => (pathname === '/' ? `#${id}` : `/#${id}`)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -25,11 +29,12 @@ export default function Header({ menuOpen, setMenuOpen }) {
   }, [menuOpen, setMenuOpen])
 
   const navLinks = [
-    { href: '#services', label: 'Services' },
-    { href: '#about', label: 'About Us' },
-    { href: '#gallery', label: 'Gallery' },
-    { href: '#testimonials', label: 'Testimonials' },
-    { href: '#contact', label: 'Contact' },
+    { href: sectionHref('services'), label: 'Services' },
+    { href: '/small-engine-repair', label: 'Small engines' },
+    { href: sectionHref('about'), label: 'About Us' },
+    { href: sectionHref('gallery'), label: 'Gallery' },
+    { href: sectionHref('testimonials'), label: 'Testimonials' },
+    { href: sectionHref('contact'), label: 'Contact' },
   ]
 
   return (
@@ -41,11 +46,7 @@ export default function Header({ menuOpen, setMenuOpen }) {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="dyhs-header-inner">
-          <a
-            className="dyhs-brand dyhs-logo"
-            href="#top"
-            aria-label="Dandy Yard and Home Services"
-          />
+          <Link className="dyhs-brand dyhs-logo" to="/" aria-label="Dandy Yard and Home Services" />
 
           <button
             className="dyhs-burger"
@@ -64,7 +65,7 @@ export default function Header({ menuOpen, setMenuOpen }) {
           <nav className="dyhs-nav" aria-label="Primary">
             {navLinks.map((link, i) => (
               <motion.a
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -118,7 +119,7 @@ export default function Header({ menuOpen, setMenuOpen }) {
               <nav className="dyhs-drawer-nav" aria-label="Mobile primary">
                 {navLinks.map((link, i) => (
                   <motion.a
-                    key={link.href}
+                    key={link.label}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     initial={{ opacity: 0, x: -20 }}

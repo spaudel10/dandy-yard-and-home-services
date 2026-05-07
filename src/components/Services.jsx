@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { Link } from 'react-router-dom'
 import { motion as Motion, AnimatePresence } from 'framer-motion'
 
 const SEASONS = ['spring', 'summer', 'fall', 'winter']
@@ -29,19 +30,19 @@ const SEASON_ICONS = {
   ),
 }
 
-/** All 12 photoreal assets in public/services/ (1–4 align with seasonal packages; 5–12 from notr.note) */
+/** Photoreal assets in public/services/ — seasonal first, then small engines emphasized, then the rest */
 const SERVICE_PHOTOS_ALL = [
   { label: 'Spring Lawn Setup', image: '/services/1_Spring_Lawn_Setup_Photoreal_1_20260329_001609.png' },
   { label: 'Summer Maintenance', image: '/services/2_Summer_Maintenance_Bright_su_1_20260329_001642.png' },
   { label: 'Fall Cleanup', image: '/services/3_Fall_Cleanup_Autumn_afternoo_1_20260329_001706.png' },
   { label: 'Winter Snow Services', image: '/services/4_Winter_Snow_Services_Blue_ho_1_20260329_001726.png' },
+  { label: 'Small engine repair and maintenance', image: '/services/10_Small_engine_repair_and_mainte_1_20260329_001911.png' },
+  { label: 'Golf cart repair and maintenance', image: '/services/11_Golf_cart_repair_and_maintenan_1_20260329_001927.png' },
   { label: 'Snow removal', image: '/services/5_Snow_removal_Action_capable_1_20260329_001741.png' },
   { label: 'Lawn maintenance', image: '/services/6_Lawn_maintenance_Recurring_c_1_20260329_001757.png' },
   { label: 'Tree and shrub trimming', image: '/services/7_Tree_and_shrub_trimming_Arbo_1_20260329_001820.png' },
   { label: 'Junk removal', image: '/services/8_Junk_removal_Before_after_si_1_20260329_001840.png' },
   { label: 'Small landscaping jobs', image: '/services/9_Small_landscaping_jobs_Fresh_1_20260329_001856.png' },
-  { label: 'Small engine repair and maintenance', image: '/services/10_Small_engine_repair_and_mainte_1_20260329_001911.png' },
-  { label: 'Golf cart repair and maintenance', image: '/services/11_Golf_cart_repair_and_maintenan_1_20260329_001927.png' },
   { label: 'Small handyman house repairs', image: '/services/12_Small_handyman_house_repairs_1_20260329_001941.png' },
 ]
 
@@ -119,6 +120,35 @@ export default function Services({ activeSeason, setActiveSeason }) {
   return (
     <section id="services" className="dyhs-seasonal">
       <div className="dyhs-container">
+        <div id="small-engine" className="dyhs-small-engine">
+          <h2 className="dyhs-small-engine-title">Small engine repair &amp; maintenance</h2>
+          <p className="dyhs-small-engine-intro">
+            Golf carts, mowers, snow blowers, line trimmers, chainsaws, and more—see the full list and how we help on
+            our dedicated small engine page.
+          </p>
+          <button
+            type="button"
+            className="dyhs-small-engine-trigger"
+            onClick={() => setSmallEngineOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={smallEngineOpen}
+          >
+            <span
+              className="dyhs-small-engine-trigger-media"
+              style={{ backgroundImage: `url(${SMALL_ENGINE_IMAGE})` }}
+            />
+            <span className="dyhs-small-engine-trigger-hint">Tap to view larger</span>
+          </button>
+          <div className="dyhs-small-engine-actions">
+            <Link className="dyhs-btn dyhs-btn-secondary" to="/small-engine-repair">
+              Full small engine details
+            </Link>
+            <a className="dyhs-small-engine-cta dyhs-btn dyhs-btn-primary" href="#contact">
+              Book small engine service
+            </a>
+          </div>
+        </div>
+
         <Motion.div
           className="dyhs-services-panel"
           initial={{ opacity: 0, y: 40 }}
@@ -198,22 +228,6 @@ export default function Services({ activeSeason, setActiveSeason }) {
           </Motion.div>
         </Motion.div>
 
-        <div className="dyhs-small-engine">
-          <h2 className="dyhs-small-engine-title">Small Engine Repair</h2>
-          <button
-            type="button"
-            className="dyhs-small-engine-trigger"
-            onClick={() => setSmallEngineOpen(true)}
-            aria-haspopup="dialog"
-            aria-expanded={smallEngineOpen}
-          >
-            <span
-              className="dyhs-small-engine-trigger-media"
-              style={{ backgroundImage: `url(${SMALL_ENGINE_IMAGE})` }}
-            />
-          </button>
-        </div>
-
         <div className="dyhs-more-services">
           <h2 className="dyhs-more-services-title">All services</h2>
           <p className="dyhs-more-services-intro">
@@ -255,7 +269,7 @@ export default function Services({ activeSeason, setActiveSeason }) {
               <Motion.div
                 role="dialog"
                 aria-modal="true"
-                aria-label="Small Engine Repair"
+                aria-label="Small engine repair and maintenance"
                 className="dyhs-modal-card"
                 initial={{ opacity: 0, scale: 0.94, y: 16 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -274,6 +288,27 @@ export default function Services({ activeSeason, setActiveSeason }) {
                   className="dyhs-modal-card-media"
                   style={{ backgroundImage: `url(${SMALL_ENGINE_IMAGE})` }}
                 />
+                <div className="dyhs-modal-card-body">
+                  <p className="dyhs-modal-card-text">
+                    We work on residential and light commercial small engines—tune-ups, oil and blade service, carburetor
+                    and fuel system issues, starting and running problems, and seasonal prep. Not sure if we can help? Ask
+                    when you book.
+                  </p>
+                  <Link
+                    className="dyhs-btn dyhs-btn-secondary dyhs-modal-card-btn"
+                    to="/small-engine-repair"
+                    onClick={() => setSmallEngineOpen(false)}
+                  >
+                    Full equipment &amp; services list
+                  </Link>
+                  <a
+                    className="dyhs-btn dyhs-btn-primary dyhs-modal-card-btn"
+                    href="/#contact"
+                    onClick={() => setSmallEngineOpen(false)}
+                  >
+                    Request a booking
+                  </a>
+                </div>
               </Motion.div>
             </Motion.div>
           )}

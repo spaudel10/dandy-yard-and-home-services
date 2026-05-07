@@ -21,7 +21,7 @@ export default function Hero({ activeSeason, snowDots, fallLeaves }) {
   }, [])
 
   return (
-    <section className="dyhs-hero" aria-label="Yard and home services">
+    <section className="dyhs-hero" aria-label="Yard, home, and small engine services">
       <div className="dyhs-hero-split">
         <div className="dyhs-hero-copy">
           <div className="dyhs-hero-copy-inner">
@@ -32,7 +32,7 @@ export default function Hero({ activeSeason, snowDots, fallLeaves }) {
                 {...fadeUp}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               >
-                Lawn · Snow · Repairs · More
+                Small engines · Lawn · Snow · Repairs
               </Motion.p>
             </div>
 
@@ -42,9 +42,9 @@ export default function Hero({ activeSeason, snowDots, fallLeaves }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="dyhs-hero-title-lead">Local yard and lawn care.</span>
+              <span className="dyhs-hero-title-lead">Small engine repair and yard care, local.</span>
               <span className="dyhs-hero-title-em">
-                <span className="dyhs-hero-title-accent">Dependable</span> home service for every season.
+                <span className="dyhs-hero-title-accent">Dependable</span> service for your equipment and every season.
               </span>
             </Motion.h1>
 
@@ -54,7 +54,8 @@ export default function Hero({ activeSeason, snowDots, fallLeaves }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
             >
-            Comprehensive seasonal yard care: precision mowing, thorough cleanups, prompt snow removal, and expert small repairs.
+            From mowers and snowblowers to generators and golf carts—we service small engines you rely on—plus precision mowing,
+            cleanups, snow removal, and expert home repairs.
             </Motion.p>
 
             <Motion.div

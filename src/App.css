@@ -940,7 +940,8 @@ html {
 .dyhs-small-engine {
   position: relative;
   z-index: 5;
-  margin-top: 0;
+  scroll-margin-top: 88px;
+  margin: 0 0 22px;
   padding: 24px 22px;
   background: var(--season-surface);
   border-radius: 20px;
@@ -949,16 +950,37 @@ html {
   text-align: center;
 }
 
-.dyhs-services-panel + .dyhs-small-engine {
-  margin-top: 22px;
-}
-
 .dyhs-small-engine-title {
-  margin: 0 0 18px;
+  margin: 0 0 10px;
   font-size: 22px;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--season-heading);
+}
+
+.dyhs-small-engine-intro {
+  margin: 0 auto 18px;
+  max-width: 42rem;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--season-muted);
+  text-align: center;
+}
+
+.dyhs-small-engine-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.dyhs-small-engine-cta {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
 
 .dyhs-small-engine-trigger {
@@ -1073,6 +1095,29 @@ html {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.dyhs-modal-card-body {
+  padding: 18px 20px 22px;
+  text-align: left;
+}
+
+.dyhs-modal-card-text {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--season-text);
+}
+
+.dyhs-modal-card-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+}
+
+.dyhs-modal-card-body .dyhs-modal-card-btn + .dyhs-modal-card-btn {
+  margin-top: 10px;
 }
 
 /* ─── Season Selector ─── */
@@ -1297,6 +1342,17 @@ html {
   font-size: 16px;
   line-height: 1.7;
   max-width: 620px;
+}
+
+.dyhs-text-link {
+  color: var(--season-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.dyhs-text-link:hover {
+  text-decoration-thickness: 2px;
 }
 
 /* ─── About ─── */
@@ -1886,17 +1942,17 @@ html {
   }
 
   .dyhs-small-engine {
-    margin-top: 0;
+    margin: 0 0 16px;
     padding: 18px 14px;
     border-radius: 16px;
   }
 
-  .dyhs-services-panel + .dyhs-small-engine {
-    margin-top: 16px;
-  }
-
   .dyhs-small-engine-title {
     font-size: 19px;
+  }
+
+  .dyhs-small-engine-intro {
+    font-size: 14px;
   }
 
   .dyhs-seasonal-grid {
@@ -2037,6 +2093,284 @@ html {
 
   .dyhs-footer-nav a {
     font-size: 13px;
+  }
+}
+
+/* ─── Small engine subpage ─── */
+.dyhs-subpage {
+  min-height: 50vh;
+}
+
+.dyhs-engine-hero {
+  padding: 5.5rem 0 2.75rem;
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--season-bg) 92%, var(--season-accent)) 0%,
+    var(--season-bg) 48%,
+    var(--season-surface) 100%
+  );
+  border-bottom: 1px solid var(--season-border);
+}
+
+.dyhs-engine-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 420px);
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.dyhs-engine-hero-kicker {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--season-accent);
+}
+
+.dyhs-engine-hero-title {
+  margin: 0 0 14px;
+  font-size: clamp(1.85rem, 4vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--season-heading);
+}
+
+.dyhs-engine-hero-lead {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--season-text);
+  max-width: 38rem;
+}
+
+.dyhs-engine-hero-lead strong {
+  color: var(--season-heading);
+  font-weight: 700;
+}
+
+.dyhs-engine-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+.dyhs-engine-hero-visual {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  min-height: 220px;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--season-border);
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12);
+}
+
+.dyhs-engine-showcase {
+  padding: 0 0 2.5rem;
+  border-bottom: 1px solid var(--season-border);
+}
+
+.dyhs-engine-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.dyhs-engine-showcase-card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dyhs-engine-showcase-media-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--season-border);
+  background: var(--season-bg);
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+  aspect-ratio: 4 / 3;
+}
+
+.dyhs-engine-showcase-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.dyhs-engine-showcase-caption {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--season-heading);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  padding: 0 2px;
+}
+
+.dyhs-engine-section {
+  padding: 3rem 0;
+}
+
+.dyhs-engine-section-intro {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+.dyhs-engine-section-alt {
+  background: color-mix(in srgb, var(--season-soft) 55%, var(--season-bg));
+  border-block: 1px solid var(--season-border);
+}
+
+.dyhs-engine-chip-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dyhs-engine-chip {
+  margin: 0;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--season-heading);
+  background: var(--season-surface);
+  border: 1px solid var(--season-border);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.dyhs-engine-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.dyhs-engine-card {
+  margin: 0;
+  padding: 0;
+  border-radius: 16px;
+  background: var(--season-surface);
+  border: 1px solid var(--season-border);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dyhs-engine-card-media {
+  aspect-ratio: 16 / 10;
+  background: var(--season-bg);
+}
+
+.dyhs-engine-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.dyhs-engine-card-body {
+  padding: 18px 20px 22px;
+  flex: 1;
+}
+
+.dyhs-engine-card-title {
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--season-heading);
+  letter-spacing: -0.02em;
+}
+
+.dyhs-engine-card-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--season-muted);
+}
+
+.dyhs-engine-cta-band {
+  padding: 2.5rem 0 3.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--season-accent-rgb), 0.14),
+    color-mix(in srgb, var(--season-surface) 90%, var(--season-bg))
+  );
+  border-top: 1px solid var(--season-border);
+}
+
+.dyhs-engine-cta-inner {
+  text-align: center;
+}
+
+.dyhs-engine-cta-text {
+  margin: 0 0 1.1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--season-heading);
+}
+
+.dyhs-engine-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+a.dyhs-brand {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 1024px) and (min-width: 601px) {
+  .dyhs-engine-showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dyhs-engine-showcase-grid .dyhs-engine-showcase-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 420px;
+    justify-self: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dyhs-engine-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .dyhs-engine-hero-visual {
+    order: -1;
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .dyhs-engine-showcase-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .dyhs-engine-hero-actions .dyhs-btn,
+  .dyhs-engine-cta-actions .dyhs-btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
   }
 }
 

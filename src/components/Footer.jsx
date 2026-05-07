@@ -1,5 +1,9 @@
+import { useLocation } from 'react-router-dom'
+
 export default function Footer() {
   const year = new Date().getFullYear()
+  const { pathname } = useLocation()
+  const sectionHref = (id) => (pathname === '/' ? `#${id}` : `/#${id}`)
 
   return (
     <footer className="dyhs-footer">
@@ -20,10 +24,11 @@ export default function Footer() {
         </div>
         <div className="dyhs-footer-links">
           <nav className="dyhs-footer-nav" aria-label="Footer">
-            <a href="#services">Services</a>
-            <a href="#about">About</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact">Contact</a>
+            <a href={sectionHref('services')}>Services</a>
+            <a href="/small-engine-repair">Small engines</a>
+            <a href={sectionHref('about')}>About</a>
+            <a href={sectionHref('gallery')}>Gallery</a>
+            <a href={sectionHref('contact')}>Contact</a>
           </nav>
           <a
             className="dyhs-footer-fb"
