@@ -1,33 +1,38 @@
 import { useState, useCallback, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion as Motion, AnimatePresence } from 'framer-motion'
 import Stars from './Stars'
 import AnimatedSection from './AnimatedSection'
 
 const testimonials = [
   {
-    name: 'Jordan D.',
-    role: 'Spring Lawn Setup',
-    text: 'They transformed our yard quickly. The seeding and cleanup looked great and stayed that way all week.',
+    name: 'Ford Cory',
+    role: 'Google Review',
+    text: 'Very awesome to deal with quick and efficient service with great pricing I would recommend them to everyone.',
   },
   {
-    name: 'Sarah W.',
-    role: 'Fall Cleanup',
-    text: 'Fast, professional, and thorough. They handled the leaves and debris exactly how we wanted.',
+    name: 'D&D Group Company',
+    role: 'Google Review',
+    text: 'We have been using this landscaping company for several years now, and they have consistently exceeded our expectations. From regular yard maintenance to larger seasonal cleanups, their team is always reliable, professional, and incredibly hardworking. What really stands out is their attention to detail. Everything is left looking clean, tidy, and well cared for. They show up when they say they will, communicate clearly, and take pride in their work, which is hard to find these days. Not only do they take great care of our own property, but they also maintain several of our rental properties. It has been such a relief knowing those properties are always kept in top shape without us having to worry or follow up. Highly recommend them to anyone looking for dependable, top-quality landscaping and yard care.',
   },
   {
-    name: 'Chris M.',
-    role: 'Winter Snow Services',
-    text: 'Great communication during the storm and the driveway was cleared on time. Highly recommend.',
+    name: 'Melissa Fortin',
+    role: 'Google Review',
+    text: 'Great experience, yard always looks great, timely response for snow removal, would recommend.',
   },
   {
-    name: 'Alex R.',
-    role: 'Summer Maintenance',
-    text: 'Our lawn has never looked better. Consistent, reliable, and always on schedule. Truly top-notch service.',
+    name: 'Jaelynn Wiest',
+    role: 'Google Review',
+    text: 'Efficient, timely and hard working. Easy to work with. Highly recommend! Happy with product and communication!',
   },
   {
-    name: 'Maria L.',
-    role: 'Fall Cleanup',
-    text: 'They made our backyard look brand new before the holidays. Friendly crew and great attention to detail.',
+    name: 'john mcneill',
+    role: 'Google Review',
+    text: 'Awesome bunch of guys they cleaned up my yard took all my trash away very friendly and knowledgeable and respectful I would highly recommend them to anyone I am going to get them in the fall to do my fall cleanup and this winter to do my snow removal give them a try you will not be disappointed.',
+  },
+  {
+    name: 'Royal Bist1',
+    role: 'Google Review',
+    text: 'Great service.',
   },
 ]
 
@@ -52,10 +57,7 @@ export default function Testimonials() {
   const [direction, setDirection] = useState(0)
   const cardsPerView = useCardsPerView()
   const totalPages = Math.ceil(testimonials.length / cardsPerView)
-
-  useEffect(() => {
-    setPage((p) => Math.min(p, totalPages - 1))
-  }, [totalPages])
+  const safePage = Math.min(page, Math.max(totalPages - 1, 0))
 
   const paginate = useCallback((dir) => {
     setDirection(dir)
@@ -68,8 +70,8 @@ export default function Testimonials() {
   }, [paginate])
 
   const visibleTestimonials = testimonials.slice(
-    page * cardsPerView,
-    page * cardsPerView + cardsPerView
+    safePage * cardsPerView,
+    safePage * cardsPerView + cardsPerView
   )
 
   const slideVariants = {
@@ -107,8 +109,8 @@ export default function Testimonials() {
 
         <div className="dyhs-testimonial-carousel">
           <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={page}
+            <Motion.div
+              key={safePage}
               className="dyhs-testimonial-grid"
               custom={direction}
               variants={slideVariants}
@@ -137,7 +139,7 @@ export default function Testimonials() {
                   </div>
                 </article>
               ))}
-            </motion.div>
+            </Motion.div>
           </AnimatePresence>
         </div>
 
@@ -145,9 +147,9 @@ export default function Testimonials() {
           {Array.from({ length: totalPages }).map((_, i) => (
             <button
               key={i}
-              className={`dyhs-dot ${page === i ? 'dyhs-dot-active' : ''}`}
+              className={`dyhs-dot ${safePage === i ? 'dyhs-dot-active' : ''}`}
               onClick={() => {
-                setDirection(i > page ? 1 : -1)
+                setDirection(i > safePage ? 1 : -1)
                 setPage(i)
               }}
               aria-label={`Go to page ${i + 1}`}
