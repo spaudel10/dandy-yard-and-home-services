@@ -50,28 +50,28 @@ const services = [
     title: 'Spring Lawn Setup',
     subtitle: 'Get your yard ready for the season',
     bullets: ['Lawn seeding and fertilization', 'Quick cleanup after winter'],
-    mediaStyle: { backgroundImage: 'url(/Spring.png)' },
+    image: '/Spring.png',
   },
   {
     key: 'summer',
     title: 'Summer Maintenance',
     subtitle: 'Keep it fresh all summer long',
     bullets: ['Weekly lawn mowing and care', 'Edge trimming and quick touch-ups'],
-    mediaStyle: { backgroundImage: 'url(/summer.png)' },
+    image: '/summer.png',
   },
   {
     key: 'fall',
     title: 'Fall Cleanup',
     subtitle: 'Leaves out. Yard looking sharp.',
     bullets: ['Leaf removal and yard cleanup', 'Seasonal debris hauling'],
-    mediaStyle: { backgroundImage: 'url(/fall.png)' },
+    image: '/fall.png',
   },
   {
     key: 'winter',
     title: 'Winter Snow Services',
     subtitle: 'Safe walkways and driveways',
     bullets: ['Snow plowing and de-icing', 'Storm-ready planning'],
-    mediaStyle: { backgroundImage: 'url(/winter.png)' },
+    image: '/winter.png',
   },
 
   
@@ -115,10 +115,9 @@ export default function Services({ activeSeason, setActiveSeason }) {
             className="dyhs-small-engine-trigger"
             style={{ display: 'block' }}
           >
-            <span
-              className="dyhs-small-engine-trigger-media"
-              style={{ backgroundImage: `url(${SMALL_ENGINE_IMAGE})` }}
-            />
+            <span className="dyhs-small-engine-trigger-media">
+              <img src={SMALL_ENGINE_IMAGE} alt="Small engine repair services overview" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+            </span>
           </Link>
         </div>
 
@@ -129,6 +128,7 @@ export default function Services({ activeSeason, setActiveSeason }) {
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
+          <h2 className="dyhs-sr-only">Seasonal Yard Care Services</h2>
           <div className="dyhs-season-selector" role="tablist" aria-label="Season selector">
             {SEASONS.map((season) => (
               <button
@@ -178,13 +178,13 @@ export default function Services({ activeSeason, setActiveSeason }) {
                 >
                   <div
                     className="dyhs-service-media"
-                    style={s.mediaStyle}
-                    aria-hidden="true"
-                  />
+                  >
+                    <img src={s.image} alt={`${s.title} visual`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+                  </div>
                   <div className="dyhs-service-body">
-                    <h2 className={`dyhs-service-title dyhs-service-title-${s.key}`}>
+                    <h3 className={`dyhs-service-title dyhs-service-title-${s.key}`}>
                       {s.title}
-                    </h2>
+                    </h3>
                     <p className="dyhs-service-subtitle">{s.subtitle}</p>
                     <ul className="dyhs-service-list">
                       {s.bullets.map((b) => (
@@ -211,9 +211,9 @@ export default function Services({ activeSeason, setActiveSeason }) {
               <article key={item.image} className="dyhs-more-service-card" role="listitem">
                 <div
                   className="dyhs-more-service-media"
-                  style={{ backgroundImage: `url(${item.image})` }}
-                  aria-hidden="true"
-                />
+                >
+                  <img src={item.image} alt={item.label} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+                </div>
                 <p className="dyhs-more-service-label">{item.label}</p>
               </article>
             ))}

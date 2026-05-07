@@ -31,7 +31,11 @@ export default function About() {
             <Link to="/small-engine-repair" className="dyhs-text-link">
               small engine repair
             </Link>{' '}
-            page.
+            page, or{' '}
+            <a href="#contact" className="dyhs-text-link">
+              contact us today
+            </a>{' '}
+            to get started.
           </p>
         </div>
         <div className="dyhs-stats-grid">

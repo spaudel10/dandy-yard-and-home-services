@@ -21,13 +21,13 @@ export default function Gallery() {
             <motion.div
               key={item.image}
               className="dyhs-gallery-tile"
-              style={{ backgroundImage: `url(${item.image})` }}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ scale: 1.03, transition: { duration: 0.25 } }}
             >
+              <img src={item.image} alt={item.label} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
               <span className="dyhs-gallery-tile-label">{item.label}</span>
             </motion.div>
           ))}

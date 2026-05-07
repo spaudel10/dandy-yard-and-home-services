@@ -65,6 +65,16 @@ export default function Contact() {
               Email us
             </a>
           </div>
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d164506.65750346385!2d-112.35532551408892!3d49.80004169999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x536efa3461cc4d73%3A0xe104ffae3b47bd17!2sTaber%2C%20AB!5e0!3m2!1sen!2sca!4v1714850000000!5m2!1sen!2sca" 
+            width="100%" 
+            height="250" 
+            style={{border: 0, borderRadius: '16px', marginBottom: '24px', backgroundColor: '#f1f5f9'}} 
+            allowFullScreen="" 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Service Area Map"
+          ></iframe>
           <form className="dyhs-contact-form" action={FORMSPREE_ENDPOINT} method="POST">
             <input type="hidden" name="_subject" value="Service request from website" />
             <input type="hidden" name="_replyto" value={email} />
