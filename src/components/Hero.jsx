@@ -42,7 +42,7 @@ export default function Hero({ activeSeason, snowDots, fallLeaves }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="dyhs-hero-title-lead">Small engine repair and yard care, local.</span>
+              <span className="dyhs-hero-title-lead">Small engines repair and Yard care, Local.</span>
               <span className="dyhs-hero-title-em">
                 <span className="dyhs-hero-title-accent">Dependable</span> service for your equipment and every season.
               </span>
