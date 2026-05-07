@@ -12,7 +12,7 @@ const testimonials = [
   {
     name: 'D&D Group Company',
     role: 'Google Review',
-    text: 'We have been using this landscaping company for several years now, and they have consistently exceeded our expectations. From regular yard maintenance to larger seasonal cleanups, their team is always reliable, professional, and incredibly hardworking. What really stands out is their attention to detail. Everything is left looking clean, tidy, and well cared for. They show up when they say they will, communicate clearly, and take pride in their work, which is hard to find these days. Not only do they take great care of our own property, but they also maintain several of our rental properties. It has been such a relief knowing those properties are always kept in top shape without us having to worry or follow up. Highly recommend them to anyone looking for dependable, top-quality landscaping and yard care.',
+    text: 'We have been using this landscaping company for several years now, and they have consistently exceeded our expectations. From regular yard maintenance to larger seasonal cleanups, their team is always reliable, professional, and incredibly hardworking.',
   },
   {
     name: 'Melissa Fortin',
