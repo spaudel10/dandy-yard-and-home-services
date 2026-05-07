@@ -122,7 +122,6 @@ export default function Testimonials() {
               {visibleTestimonials.map((t) => (
                 <article key={t.name} className="dyhs-testimonial-card">
                   <Stars />
-                  <p className="dyhs-testimonial-text">"{t.text}"</p>
                   <div className="dyhs-person">
                     <div className="dyhs-avatar" aria-hidden="true">
                       {t.name
@@ -137,6 +136,7 @@ export default function Testimonials() {
                       <span className="dyhs-person-role">{t.role}</span>
                     </div>
                   </div>
+                  <p className="dyhs-testimonial-text">"{t.text}"</p>
                 </article>
               ))}
             </Motion.div>
