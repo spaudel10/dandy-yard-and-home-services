@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { motion as Motion, AnimatePresence } from 'framer-motion'
 
@@ -96,22 +94,6 @@ const cardVariants = {
 }
 
 export default function Services({ activeSeason, setActiveSeason }) {
-  const [smallEngineOpen, setSmallEngineOpen] = useState(false)
-
-  useEffect(() => {
-    if (!smallEngineOpen) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    const onKey = (e) => {
-      if (e.key === 'Escape') setSmallEngineOpen(false)
-    }
-    window.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = prev
-      window.removeEventListener('keydown', onKey)
-    }
-  }, [smallEngineOpen])
-
   const orderedServices = [
     ...services.filter((s) => s.key === activeSeason),
     ...services.filter((s) => s.key !== activeSeason),
@@ -121,32 +103,23 @@ export default function Services({ activeSeason, setActiveSeason }) {
     <section id="services" className="dyhs-seasonal">
       <div className="dyhs-container">
         <div id="small-engine" className="dyhs-small-engine">
-          <h2 className="dyhs-small-engine-title">Small engine repair &amp; maintenance</h2>
+          <Link to="/small-engine-repair" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h2 className="dyhs-small-engine-title">Small engine repair &amp; maintenance</h2>
+          </Link>
           <p className="dyhs-small-engine-intro">
             Golf carts, mowers, snow blowers, line trimmers, chainsaws, and more—see the full list and how we help on
             our dedicated small engine page.
           </p>
-          <button
-            type="button"
+          <Link
+            to="/small-engine-repair"
             className="dyhs-small-engine-trigger"
-            onClick={() => setSmallEngineOpen(true)}
-            aria-haspopup="dialog"
-            aria-expanded={smallEngineOpen}
+            style={{ display: 'block' }}
           >
             <span
               className="dyhs-small-engine-trigger-media"
               style={{ backgroundImage: `url(${SMALL_ENGINE_IMAGE})` }}
             />
-            <span className="dyhs-small-engine-trigger-hint">Tap to view larger</span>
-          </button>
-          <div className="dyhs-small-engine-actions">
-            <Link className="dyhs-btn dyhs-btn-secondary" to="/small-engine-repair">
-              Full small engine details
-            </Link>
-            <a className="dyhs-small-engine-cta dyhs-btn dyhs-btn-primary" href="#contact">
-              Book small engine service
-            </a>
-          </div>
+          </Link>
         </div>
 
         <Motion.div
@@ -247,74 +220,6 @@ export default function Services({ activeSeason, setActiveSeason }) {
           </div>
         </div>
       </div>
-
-      {createPortal(
-        <AnimatePresence>
-          {smallEngineOpen && (
-            <Motion.div
-              key="small-engine-modal"
-              className="dyhs-modal-root"
-              role="presentation"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <button
-                type="button"
-                className="dyhs-modal-backdrop"
-                aria-label="Close"
-                onClick={() => setSmallEngineOpen(false)}
-              />
-              <Motion.div
-                role="dialog"
-                aria-modal="true"
-                aria-label="Small engine repair and maintenance"
-                className="dyhs-modal-card"
-                initial={{ opacity: 0, scale: 0.94, y: 16 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.96, y: 12 }}
-                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <button
-                  type="button"
-                  className="dyhs-modal-close"
-                  onClick={() => setSmallEngineOpen(false)}
-                  aria-label="Close dialog"
-                >
-                  ×
-                </button>
-                <div
-                  className="dyhs-modal-card-media"
-                  style={{ backgroundImage: `url(${SMALL_ENGINE_IMAGE})` }}
-                />
-                <div className="dyhs-modal-card-body">
-                  <p className="dyhs-modal-card-text">
-                    We work on residential and light commercial small engines—tune-ups, oil and blade service, carburetor
-                    and fuel system issues, starting and running problems, and seasonal prep. Not sure if we can help? Ask
-                    when you book.
-                  </p>
-                  <Link
-                    className="dyhs-btn dyhs-btn-secondary dyhs-modal-card-btn"
-                    to="/small-engine-repair"
-                    onClick={() => setSmallEngineOpen(false)}
-                  >
-                    Full equipment &amp; services list
-                  </Link>
-                  <a
-                    className="dyhs-btn dyhs-btn-primary dyhs-modal-card-btn"
-                    href="/#contact"
-                    onClick={() => setSmallEngineOpen(false)}
-                  >
-                    Request a booking
-                  </a>
-                </div>
-              </Motion.div>
-            </Motion.div>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
     </section>
   )
 }
